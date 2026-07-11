@@ -62,11 +62,11 @@ export const invitation = {
     groomBankName: "",
     groomBankAccountName: "",
     groomBankAccountNumber: "",
-    groomBankQr: "",
+    groomBankQr: "/images/bank/trai.jpg",
     brideBankName: "",
     brideBankAccountName: "",
     brideBankAccountNumber: "",
-    brideBankQr: "",
+    brideBankQr: "/images/bank/gai.jpg",
   },
 
   flags: {

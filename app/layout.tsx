@@ -30,9 +30,16 @@ const dateVi = new Date(`${invitation.date}T00:00:00+07:00`).toLocaleDateString(
 });
 const description = `Trân trọng kính mời quý khách đến dự lễ cưới của ${invitation.groom.shortName} & ${invitation.bride.shortName} · ${dateVi} · ${invitation.venueName}, ${invitation.address.replace(/\n/g, " ")}`;
 
-// Set NEXT_PUBLIC_SITE_URL to your real domain in production so Facebook/Zalo can
-// fetch the absolute preview image URL (e.g. https://thiepcuoi.example.com).
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Facebook/Zalo need an absolute, reachable URL for the preview image. On Vercel we
+// auto-detect the deployment domain; set NEXT_PUBLIC_SITE_URL to override (e.g. a
+// custom domain like https://thiepcuoi.example.com).
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

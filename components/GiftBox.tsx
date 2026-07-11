@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { invitation } from "@/lib/invitationData";
 
 function BankCard({
@@ -13,20 +14,46 @@ function BankCard({
   accountNumber: string;
   qr: string;
 }) {
-  const hasInfo = bankName || accountName || accountNumber || qr;
+  const hasText = bankName || accountName || accountNumber;
+  const hasInfo = hasText || qr;
 
   return (
-    <div className="flex-1 rounded-3xl bg-wheat px-6 py-8 text-center shadow-[0_18px_45px_-24px_rgba(45,54,20,0.3)] ring-1 ring-olive/5">
+    <div className="flex flex-1 flex-col items-center rounded-3xl bg-wheat px-6 py-8 text-center shadow-[0_18px_45px_-24px_rgba(45,54,20,0.3)] ring-1 ring-olive/5">
       <p className="font-serif text-lg tracking-widest text-olive uppercase">{sideLabel}</p>
-      {hasInfo ? (
+
+      {hasText && (
         <div className="mt-4 space-y-1 text-sm text-ink/80">
           {bankName && <p>{bankName}</p>}
           {accountName && <p>{accountName}</p>}
           {accountNumber && <p className="font-medium">{accountNumber}</p>}
         </div>
-      ) : (
-        <p className="mt-4 text-sm italic text-ink/40">Chưa cập nhật thông tin</p>
       )}
+
+      {qr && (
+        <>
+          <div className="mt-5 overflow-hidden rounded-2xl bg-white p-2 shadow-sm ring-1 ring-olive/10">
+            <Image
+              src={qr}
+              alt={`Mã QR mừng cưới ${sideLabel}`}
+              width={220}
+              height={220}
+              className="h-44 w-44 object-contain sm:h-52 sm:w-52"
+            />
+          </div>
+          <p className="mt-3 text-xs tracking-wide text-ink-soft">
+            {invitation.labels.qrScanText}
+          </p>
+          <a
+            href={qr}
+            download
+            className="mt-2 text-xs font-medium text-olive underline-offset-2 hover:underline"
+          >
+            {invitation.labels.saveQR}
+          </a>
+        </>
+      )}
+
+      {!hasInfo && <p className="mt-4 text-sm italic text-ink/40">Chưa cập nhật thông tin</p>}
     </div>
   );
 }
