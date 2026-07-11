@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf5ec;
+  --foreground: #4a4632;
+
+  --cream: #faf5ec;
+  --cream-deep: #f2ebd9;
+  --card: #faf6ea;
+  --wheat: #fdf9f0;
+  --olive: #4a5320;
+  --olive-light: #7a8442;
+  --olive-deep: #39441a;
+  --blossom: #cf8a8a;
+  --blossom-soft: #e2a9a9;
+  --ink: #4a4632;
+  --ink-soft: #837c64;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-card: var(--card);
+  --color-wheat: var(--wheat);
+  --color-olive: var(--olive);
+  --color-olive-light: var(--olive-light);
+  --color-olive-deep: var(--olive-deep);
+  --color-blossom: var(--blossom);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  /* backward-compatible aliases so older components keep working */
+  --color-ivory: var(--cream);
+  --color-ivory-deep: var(--cream-deep);
+  --color-gold: var(--olive);
+  --color-gold-soft: var(--olive-light);
+  --color-sage: var(--olive-light);
+  --color-sage-deep: var(--olive-deep);
+
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
+  --font-script: var(--font-dancing);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Olive radial backdrop for the envelope cover */
+.envelope-bg {
+  background:
+    radial-gradient(120% 90% at 50% 25%, #6a763a 0%, #55602c 42%, #414c1c 78%, #333c16 100%);
+}
+
+/* Falling petals on the envelope cover */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-15vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(115vh) rotate(320deg);
+  }
+}
+@keyframes petal-sway {
+  0%,
+  100% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+/* Real classes so the keyframes are always kept (not tree-shaken) and applied */
+.petal-fall {
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.petal-sway {
+  animation-name: petal-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Sheen on the primary olive button */
+.btn-olive {
+  background: linear-gradient(180deg, #5f6b30 0%, #47531f 55%, #3a451a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 16px rgba(45, 54, 20, 0.35);
+}
