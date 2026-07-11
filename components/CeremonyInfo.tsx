@@ -1,9 +1,12 @@
 import { invitation } from "@/lib/invitationData";
 
-const dateFormatted = new Date(`2026-07-21T00:00:00+07:00`).toLocaleDateString(
-  "vi-VN",
-  { weekday: "long", day: "2-digit", month: "2-digit", year: "numeric" },
-);
+const dateFormatted = new Date(`2026-07-21T00:00:00+07:00`).toLocaleDateString("vi-VN", {
+  weekday: "long",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  timeZone: invitation.timezone,
+});
 
 export default function CeremonyInfo() {
   return (

@@ -27,6 +27,7 @@ const dateVi = new Date(`${invitation.date}T00:00:00+07:00`).toLocaleDateString(
   day: "2-digit",
   month: "2-digit",
   year: "numeric",
+  timeZone: invitation.timezone,
 });
 const description = `Trân trọng kính mời quý khách đến dự lễ cưới của ${invitation.groom.shortName} & ${invitation.bride.shortName} · ${dateVi} · ${invitation.venueName}, ${invitation.address.replace(/\n/g, " ")}`;
 

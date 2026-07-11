@@ -2,9 +2,10 @@ import Image from "next/image";
 import { invitation } from "@/lib/invitationData";
 
 const dt = new Date(`${invitation.date}T00:00:00+07:00`);
-const weekday = dt.toLocaleDateString("vi-VN", { weekday: "long" }); // "Chủ Nhật"
-const day = dt.toLocaleDateString("vi-VN", { day: "2-digit" });
-const monthNum = dt.toLocaleDateString("vi-VN", { month: "2-digit" });
+const tz = { timeZone: invitation.timezone } as const;
+const weekday = dt.toLocaleDateString("vi-VN", { weekday: "long", ...tz }); // "Chủ Nhật"
+const day = dt.toLocaleDateString("vi-VN", { day: "2-digit", ...tz });
+const monthNum = dt.toLocaleDateString("vi-VN", { month: "2-digit", ...tz });
 
 export default function ReceptionInfo() {
   return (

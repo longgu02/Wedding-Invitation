@@ -9,6 +9,7 @@ const dateShort = new Date(`${invitation.date}T00:00:00+07:00`).toLocaleDateStri
   day: "numeric",
   month: "long",
   year: "numeric",
+  timeZone: invitation.timezone,
 });
 
 export default function Envelope({
