@@ -54,7 +54,7 @@ export const invitation = {
 
   decorFlower: "/images/decor/hoa.webp",
   logo: "/images/logo-removebg-preview.png",
-  music: "/music/mot-doi.mp3",
+  music: "/music/ABG.mp3",
 
   // Gift box / bank info — intentionally blank, same as the source invite.
   // Fill these in before going live; see README for instructions.
