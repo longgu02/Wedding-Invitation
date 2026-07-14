@@ -18,5 +18,7 @@ export async function POST(request: Request) {
     createdAt: new Date(),
   });
 
+  // The message (if any) is surfaced in the guestbook by /api/wishes, which
+  // merges RSVP messages with the wishes collection at read time.
   return NextResponse.json({ ok: true });
 }

@@ -54,7 +54,7 @@ export const invitation = {
 
   decorFlower: "/images/decor/hoa.webp",
   logo: "/images/logo-removebg-preview.png",
-  music: "/music/ABG.mp3",
+  music: "/music/mot-doi.mp3",
 
   // Gift box / bank info — intentionally blank, same as the source invite.
   // Fill these in before going live; see README for instructions.
@@ -131,6 +131,8 @@ export const invitation = {
     guestSalutation: "bạn",
     guestbook: "Sổ lưu bút",
     noWishesYet: "Chưa có lời chúc nào. Hãy là người đầu tiên!",
+    viewMoreWishes: "Xem thêm {count} lời chúc",
+    wishesCount: "Đã có {count} lời chúc",
     guestNamePlaceholder: "Nhập tên*",
     guestWishPlaceholder: "Nhập lời chúc*",
     submitWishText: "GỬI LỜI CHÚC",
