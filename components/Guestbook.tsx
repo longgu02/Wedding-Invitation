@@ -6,8 +6,11 @@ import { invitation } from "@/lib/invitationData";
 type Wish = { name: string; message: string; createdAt: string };
 type Status = "idle" | "sending" | "error";
 
+const PAGE = 5;
+
 export default function Guestbook() {
   const [wishes, setWishes] = useState<Wish[] | null>(null);
+  const [visible, setVisible] = useState(PAGE);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -35,6 +38,7 @@ export default function Guestbook() {
       if (!res.ok) throw new Error("failed");
       const data = await res.json();
       setWishes((prev) => [data.wish, ...(prev ?? [])]);
+      setVisible((v) => v + 1); // keep the just-added wish visible
       setName("");
       setMessage("");
       setStatus("idle");
@@ -43,12 +47,15 @@ export default function Guestbook() {
     }
   }
 
+  const remaining = wishes ? Math.max(0, wishes.length - visible) : 0;
+
   return (
     <section className="py-12 sm:py-16">
       <div className="mx-auto max-w-4xl rounded-3xl bg-wheat px-6 py-12 shadow-[0_18px_45px_-24px_rgba(45,54,20,0.3)] ring-1 ring-olive/5 sm:px-12">
       <p className="text-center font-serif text-lg font-medium tracking-[0.3em] text-olive uppercase sm:text-xl">
         {invitation.labels.guestbook}
       </p>
+
 
       <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-md space-y-3">
         <input
@@ -80,6 +87,11 @@ export default function Guestbook() {
         </button>
       </form>
 
+      {/* {wishes && wishes.length > 0 && (
+        <p className="mt-2 text-center text-sm text-ink-soft">
+          {invitation.labels.wishesCount.replace("{count}", String(wishes.length))}
+        </p>
+      )} */}
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {wishes === null && (
           <p className="text-center text-sm text-ink/50 md:col-span-2">Đang tải lời chúc...</p>
@@ -89,7 +101,7 @@ export default function Guestbook() {
             {invitation.labels.noWishesYet}
           </p>
         )}
-        {wishes?.map((wish, i) => (
+        {wishes?.slice(0, visible).map((wish, i) => (
           <div
             key={i}
             className="rounded-2xl border border-olive/10 bg-cream-deep/40 px-5 py-4 text-left"
@@ -101,6 +113,18 @@ export default function Guestbook() {
           </div>
         ))}
       </div>
+
+      {remaining > 0 && (
+        <div className="mt-8 text-center">
+          <button
+            type="button"
+            onClick={() => setVisible((v) => v + PAGE)}
+            className="rounded-full border border-olive/40 px-8 py-2.5 font-serif text-olive transition-colors hover:bg-olive hover:text-cream"
+          >
+            {invitation.labels.viewMoreWishes.replace("{count}", String(Math.min(PAGE, remaining)))}
+          </button>
+        </div>
+      )}
       </div>
     </section>
   );

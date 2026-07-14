@@ -131,6 +131,8 @@ export const invitation = {
     guestSalutation: "bạn",
     guestbook: "Sổ lưu bút",
     noWishesYet: "Chưa có lời chúc nào. Hãy là người đầu tiên!",
+    viewMoreWishes: "Xem thêm {count} lời chúc",
+    wishesCount: "Đã có {count} lời chúc",
     guestNamePlaceholder: "Nhập tên*",
     guestWishPlaceholder: "Nhập lời chúc*",
     submitWishText: "GỬI LỜI CHÚC",
